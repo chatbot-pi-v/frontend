@@ -1,3 +1,7 @@
 export const App = () => {
-  return <>Olá!</>
-}
+  return (
+    <div className="bg-purple-500"> 
+      Olá!
+    </div>
+  );
+};
