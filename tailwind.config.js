@@ -19,7 +19,9 @@ export default {
     colors: {
       'primary-main': '#fff',
     },
-    fontFamily: {},
+    fontFamily: {
+      'display': ['Poppins']
+    },
     extend: {},
   },
   plugins: [],

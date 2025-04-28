@@ -1,3 +1,9 @@
+import LandingPage from "@src/components/LandingPage"
+
 export const App = () => {
-  return <>Olá!</>
+  return (
+    <div>
+      <LandingPage/>
+    </div>
+  )
 }
