@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./index.html", "./src/**/*.{ts,tsx}"
+    "./index.html",  "./src/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     screens: {
@@ -13,7 +13,7 @@ export default {
       '2xl': '1400px',
       '3xl': '1600px',
       '4xl': '1800px',
-      '5xl': '200px',
+      '5xl': '2000px',
       '6xl': '2200px',
     },
     colors: {
