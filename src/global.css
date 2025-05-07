@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+
 
 @theme {
   --color-sidebar: #E9F1FA;

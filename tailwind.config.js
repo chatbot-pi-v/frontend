@@ -19,10 +19,11 @@ export default {
     colors: {
       'primary-main': '#fff',
     },
-    fontFamily: {
-      league: ['"League Gothic"', 'sans-serif'],
+    extend: {
+      fontFamily: {
+        leagueGothic: ['"League Gothic"', 'sans-serif'],
+      },
     },
-    extend: {},
   },
   plugins: [],
 }
