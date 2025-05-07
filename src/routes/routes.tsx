@@ -11,7 +11,7 @@ export const routes = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
-  }
+  },
   {
     path: "/chat",
     element: <Chat />,
