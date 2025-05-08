@@ -1,6 +1,7 @@
 import { App } from "@src/components/pages/app/App";
-import { Dashboard } from "@src/components/pages/dashboard/Dashboard";
+import { AudioUpload } from "@src/components/pages/audio-upload/AudioUpload";
 import { Chat } from "@src/components/pages/chat/Chat";
+import { Dashboard } from "@src/components/pages/dashboard/Dashboard";
 import { createBrowserRouter } from "react-router";
 
 export const routes = createBrowserRouter([
@@ -10,7 +11,11 @@ export const routes = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <Dashboard />
+  },
+  {
+    path: "/audioupload",
+    element: <AudioUpload />,
   },
   {
     path: "/chat",
