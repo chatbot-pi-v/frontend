@@ -1,20 +1,22 @@
 import { DashboardSideBar } from '@src/components/atoms/dashboard-sidebar/Dashboard-sidebar';
+import { UploadButton } from '@src/components/atoms/upload-button/Upload-button';
 import { useState } from 'react';
 
 export const AudioUpload = () => {
   const [files, setFiles] = useState<File[]>([]);
   const [citacoes, setCitacoes] = useState<string[]>([]);
+  const [uploadStatus, setUploadStatus] = useState<string[]>([]);
+  const [sendingFiles, setSendingFiles] = useState(false);
   const [links, setLinks] = useState<{ link: string; quote: string }[]>([]);
   const [newLink, setNewLink] = useState('');
   const [newQuote, setNewQuote] = useState('');
-  const [isUploading, setIsUploading] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const newFiles = Array.from(e.target.files);
-  
       setFiles((prevFiles) => [...prevFiles, ...newFiles]);
       setCitacoes((prevCitacoes) => [...prevCitacoes, ...new Array(newFiles.length).fill('')]);
+      setUploadStatus((prevStatus) => [...prevStatus, ...new Array(newFiles.length).fill('pending')]);
     }
   };
 
@@ -25,29 +27,42 @@ export const AudioUpload = () => {
   };
 
   const handleUpload = async () => {
-    const formData = new FormData();
-    setIsUploading(true);
+    const newUploadStatus = [...uploadStatus];
+    setSendingFiles(true);
 
     for (let i = 0; i < files.length; i++) {
+      if (uploadStatus[i] === 'done') continue;
+
+      newUploadStatus[i] = 'uploading';
+      setUploadStatus([...newUploadStatus]);
+
+      const formData = new FormData();
       formData.append('files', files[i]);
       formData.append('citacoes', citacoes[i]);
+
+      try {
+        await fetch('http://localhost:8000/uploadfile', {
+          method: 'POST',
+          body: formData,
+        });
+        newUploadStatus[i] = 'done';
+      } catch (err) {
+        newUploadStatus[i] = 'error';
+        console.error(`Erro ao enviar o arquivo ${files[i].name}`, err);
+      }
+
+      setUploadStatus([...newUploadStatus]);
     }
 
-    await fetch('http://localhost:8000/uploadfile', {
-      method: 'POST',
-      body: formData,
-    });
-
     alert('Arquivos enviados com sucesso!');
-    // setFiles([]);
-    // setCitacoes([]);
-    setIsUploading(false);
+    setFiles([]);
+    setCitacoes([]);
   };
-  
+
   const handleRemoveFile = (index: number) => {
-    // Atualiza o estado de arquivos e citações corretamente
-    setFiles((prevFiles) => prevFiles.filter((_, idx) => idx !== index));
-    setCitacoes((prevCitacoes) => prevCitacoes.filter((_, idx) => idx !== index));
+    setFiles((prev) => prev.filter((_, i) => i !== index));
+    setCitacoes((prev) => prev.filter((_, i) => i !== index));
+    setUploadStatus((prev) => prev.filter((_, i) => i !== index));
   };
 
   const allCitacoesFilled = citacoes.every((c) => c.trim() !== '');
@@ -67,15 +82,16 @@ export const AudioUpload = () => {
         </h1>
 
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
-          <div className="lg:w-1/2 w-full">
+          {/* <div className="lg:w-1/2 w-full">
             <h3 className="text-lg font-medium mb-2">Enviar arquivo do seu computador</h3>
 
             <label className="block border-2 border-dashed border-textDash p-17 text-center cursor-pointer rounded-lg bg-blue-50">
               <input type="file" accept="audio/*" multiple className="hidden" onChange={handleFileChange} />
               <p className="text-blue-600 font-medium">Selecione ou arraste arquivos para enviar</p>
             </label>
-          
-          </div>
+          </div> */}
+
+          <UploadButton func={handleFileChange}/>
 
           <div className="lg:w-1/2 w-full border rounded-sm shadow border-textDash">
             <div className="max-h-80 overflow-auto">
@@ -86,7 +102,6 @@ export const AudioUpload = () => {
                     <th className="p-2">Tamanho</th>
                     <th className="p-2">Citação</th>
                     <th className="p-2">Ações</th>
-                    <th className="p-2">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -105,16 +120,20 @@ export const AudioUpload = () => {
                           />
                         </td>
                         <td className="p-2">
-                            <button onClick={() => handleRemoveFile(idx)} className="text-red-500">
-                              Remover
-                            </button>
-                        </td>
-                        <td>
                           {
-                            isUploading &&
-                            <p className="text-green-500">
-                              Fazendo upload
-                            </p>
+                            (sendingFiles && uploadStatus[idx] === 'uploading') ? (
+                              <p className="text-yellow-500">Fazendo upload...</p>
+                            ) : uploadStatus[idx] === 'done' ? (
+                              <p className="text-green-600">Enviado</p>
+                            ) : uploadStatus[idx] === 'error' ? (
+                              <p className="text-red-500">Erro no upload</p>
+                            ) : (
+                              !sendingFiles && (
+                                <button onClick={() => handleRemoveFile(idx)} className="text-red-500">
+                                  Remover
+                                </button>
+                              )
+                            )
                           }
                         </td>
                       </tr>
@@ -129,7 +148,6 @@ export const AudioUpload = () => {
                 </tbody>
               </table>
             </div>
-
           </div>
         </div>
 
@@ -151,7 +169,7 @@ export const AudioUpload = () => {
           <div className="flex-grow h-px bg-blue-300" />
           <span className="mx-4 text-textDash font-extrabold">OU</span>
           <div className="flex-grow h-px bg-blue-300" />
-        </div>      
+        </div>
 
         <h1 className="text-2xl font-semibold mb-4 flex items-center gap-2">
           <img
@@ -222,9 +240,7 @@ export const AudioUpload = () => {
                         </td>
                         <td className="p-2">
                           <button
-                            onClick={() =>
-                              setLinks((prev) => prev.filter((_, i) => i !== idx))
-                            }
+                            onClick={() => setLinks((prev) => prev.filter((_, i) => i !== idx))}
                             className="text-red-500"
                           >
                             Remover
@@ -268,10 +284,7 @@ export const AudioUpload = () => {
             </button>
           </div>
         )}
-
-
       </main>
-
     </div>
   );
 };
