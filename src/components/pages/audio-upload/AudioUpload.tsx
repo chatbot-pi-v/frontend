@@ -1,5 +1,6 @@
 import { DashboardSideBar } from '@src/components/atoms/dashboard-sidebar/Dashboard-sidebar';
 import { UploadButton } from '@src/components/atoms/upload-button/Upload-button';
+import { UploadTable } from '@src/components/atoms/upload-table/Upload-table';
 import { useState } from 'react';
 
 export const AudioUpload = () => {
@@ -93,7 +94,7 @@ export const AudioUpload = () => {
 
           <UploadButton func={handleFileChange}/>
 
-          <div className="lg:w-1/2 w-full border rounded-sm shadow border-textDash">
+          {/* <div className="lg:w-1/2 w-full border rounded-sm shadow border-textDash">
             <div className="max-h-80 overflow-auto">
               <table className="w-full text-sm text-left">
                 <thead className="bg-blue-100">
@@ -148,7 +149,16 @@ export const AudioUpload = () => {
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> */}
+
+          <UploadTable 
+            files={files}
+            citacoes={citacoes}
+            uploadStatus={uploadStatus}
+            sendingFiles={sendingFiles}
+            handleCitacaoChange={handleCitacaoChange}
+            handleRemoveFile={handleRemoveFile}
+          />
         </div>
 
         {files.length > 0 && (
