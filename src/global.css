@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=League+Gothic&display=swap");
 @import "tailwindcss";
 
 @theme{
@@ -5,6 +7,8 @@
   --color-midnight: #1D1534;
   --color-ash: #3A3A3A;
   --color-retangle: #F2F0F4;
+  --font-poppins: "Poppins";
+  --font-gothic: "League Gothic"
 }
 @layer base {
   h1 {
