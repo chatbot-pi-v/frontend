@@ -11,13 +11,13 @@ export const Dashboard = () => {
                     <h3>Olá, Maria</h3>
                     <div className="grid grid-cols-3">
                         <div className="p-6">
-                            <DashboardButton label="Enviar PDFs" logo="../../../public/assets/images/dashboard/google-docs.png"/>
+                            <DashboardButton route="audioupload" label="Enviar PDFs" logo="../../../public/assets/images/dashboard/google-docs.png"/>
                         </div>
                         <div className="p-6">
-                            <DashboardButton label="Enviar audios" logo="../../../public/assets/images/dashboard/headphone.png"/>
+                            <DashboardButton route="audioupload" label="Enviar audios" logo="../../../public/assets/images/dashboard/headphone.png"/>
                         </div>
                         <div className="p-6">
-                            <DashboardButton label="Enviar imagens" logo="../../../public/assets/images/dashboard/photo.png"/>
+                            <DashboardButton route="audioupload" label="Enviar imagens" logo="../../../public/assets/images/dashboard/photo.png"/>
                         </div>
                     </div>
                 </div>

@@ -11,12 +11,18 @@ export const routes = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />
+    element: <Dashboard />,
+    children: [
+      {
+        path: "audioupload",
+        element: <AudioUpload />,
+      },
+    ] 
   },
-  {
-    path: "/audioupload",
-    element: <AudioUpload />,
-  },
+  // {
+  //   path: "/audioupload",
+  //   element: <AudioUpload />,
+  // },
   {
     path: "/chat",
     element: <Chat />,
