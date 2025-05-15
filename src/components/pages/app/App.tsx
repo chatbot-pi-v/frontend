@@ -1,9 +1,9 @@
-import { Chat } from "../chat/Chat";
+import LandingPage from "@src/components/pages/landingPage/LandingPage"
 
 export const App = () => {
   return (
-    <div> 
-      <Chat />
+    <div>
+      <LandingPage/>
     </div>
-  );
-};
+  )
+}
