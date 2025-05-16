@@ -7,13 +7,13 @@
   --color-midnight: #1D1534;
   --color-ash: #3A3A3A;
   --color-retangle: #F2F0F4;
-  --font-poppins: "Poppins";
-  --font-gothic: "League Gothic"
   --color-sidebar: #E9F1FA;
   --color-dashboard: #F4F8FB;
   --color-textDash: #68B1FC;
   --color-dashImput: #D8E5F3;
-  --font-league: 'League Gothic', sans-serif;
+  --font-poppins: "Poppins";
+  --font-gothic: "League Gothic"
+  /* --font-league: 'League Gothic', sans-serif; */
 }
 
 @layer base {
