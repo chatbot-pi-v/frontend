@@ -40,6 +40,7 @@ export const AudioUpload = () => {
       const formData = new FormData();
       formData.append('files', files[i]);
       formData.append('citacoes', citacoes[i]);
+      formData.append('caminho', './docs/audio');
 
       try {
         await fetch('http://localhost:8000/uploadfile', {
@@ -84,7 +85,7 @@ export const AudioUpload = () => {
 
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
 
-          <UploadButton func={handleFileChange}/>
+          <UploadButton func={handleFileChange} type="audio/*"/>
 
           <UploadTable 
             files={files}
