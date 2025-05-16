@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 type DashboardButtonProps = {
     label: string;
@@ -7,14 +7,15 @@ type DashboardButtonProps = {
 };
 
 export const DashboardButton = ({ label, logo, route }: DashboardButtonProps) => {
-    const navigate = useNavigate();
-
+    console.log('route - ', route)
     return (
-        <>          
-            <button onClick={() => navigate(route)}className="bg-sidebar p-6 rounded-lg w-full flex flex-col justify-center items-center">
-                <img src={logo} className="w-24"/>  
-                {label}
-            </button>
+        <> 
+            <Link to={route}>
+                <button className="bg-sidebar p-6 rounded-lg w-full flex flex-col justify-center items-center">
+                    <img src={logo} className="w-24"/>  
+                    {label}
+                </button>
+            </Link>         
         </>
     )
 }
