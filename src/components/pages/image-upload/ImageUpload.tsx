@@ -73,9 +73,9 @@ export const ImageUpload = () => {
       <main className="flex-1 p-8">
         <h1 className="text-2xl font-semibold mb-4 flex items-center gap-2">
           <img
-            src="./../../assets/images/dashboard/headphone.png"
-            alt="Ícone de fone headset"
-            className="w-6 h-6"
+            src="./../../assets/images/dashboard/photo.png"
+            alt="Ícone de imagem"
+            className="w-15 h-15"
           />
           Upload de imagem
         </h1>

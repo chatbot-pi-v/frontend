@@ -11,7 +11,7 @@ export const DashboardButton = ({ label, logo, route }: DashboardButtonProps) =>
     return (
         <> 
             <Link to={route}>
-                <button className="bg-sidebar p-6 rounded-lg w-full flex flex-col justify-center items-center">
+                <button className="bg-sidebar p-6 rounded-lg w-full flex flex-col justify-center items-center cursor-pointer hover:bg-hoverbutton transition duration-300 ease-in-out">
                     <img src={logo} className="w-24"/>  
                     {label}
                 </button>
