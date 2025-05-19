@@ -84,14 +84,16 @@ export const Login = () => {
         </form>
       </div>
 
-      {/* Direita */}
-      <div className="hidden lg:flex lg:flex-1 md:flex-1 bg-pink-500 relative flex flex-col items-center justify-center ">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <img src={ElipseMin} className="h-auto w-55 " />
+      <div className="hidden lg:flex lg:flex-1 md:flex-1 relative flex flex-col items-center justify-center items-end">
+
+        <div className="absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 ">
+          <img src={ElipseMin} className="h-auto w-9  ml-17 mt-72 "/>
         </div>
+
         <div className="">
-          <img src={ElipseMax} className="h-auto w-55" />
+          <img src={ElipseMax} className="h-auto w-30" />
         </div>
+
       </div>
     </div>
   );
