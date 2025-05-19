@@ -6,6 +6,7 @@ import { ImageUpload } from "@src/components/pages/image-upload/ImageUpload";
 import { PdfUpload } from "@src/components/pages/pdf-upload/PdfUpload";
 import { UsersControl } from "@src/components/pages/users-control/UsersControl";
 import { createBrowserRouter } from "react-router";
+import { Login } from "@src/components/pages/login/login";
 
 export const routes = createBrowserRouter([
   {
@@ -35,5 +36,9 @@ export const routes = createBrowserRouter([
   {
     path: "/chat",
     element: <Chat />,
+  },
+  {
+    path: "/Login",
+    element: <Login />,
   }
 ]);
