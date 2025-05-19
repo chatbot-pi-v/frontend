@@ -5,6 +5,7 @@ import { Dashboard } from "@src/components/pages/dashboard/Dashboard";
 import { ImageUpload } from "@src/components/pages/image-upload/ImageUpload";
 import { PdfUpload } from "@src/components/pages/pdf-upload/PdfUpload";
 import { UsersControl } from "@src/components/pages/users-control/UsersControl";
+import { UserFormPage } from "@src/components/pages/userFormPage/UserFormPage";
 import { createBrowserRouter } from "react-router";
 import { Login } from "@src/components/pages/login/login";
 
@@ -32,6 +33,10 @@ export const routes = createBrowserRouter([
   {
     path: "/userscontrol",
     element: <UsersControl />
+  },
+  {
+    path: "/userform",
+    element: <UserFormPage />,
   },
   {
     path: "/chat",
