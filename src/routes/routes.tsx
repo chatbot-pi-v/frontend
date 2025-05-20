@@ -3,6 +3,7 @@ import { AudioUpload } from "@src/components/pages/audio-upload/AudioUpload";
 import { Chat } from "@src/components/pages/chat/Chat";
 import { Dashboard } from "@src/components/pages/dashboard/Dashboard";
 import { ImageUpload } from "@src/components/pages/image-upload/ImageUpload";
+import Login from "@src/components/pages/Login";
 import { PdfUpload } from "@src/components/pages/pdf-upload/PdfUpload";
 import { UsersControl } from "@src/components/pages/users-control/UsersControl";
 import { createBrowserRouter } from "react-router";
@@ -35,5 +36,9 @@ export const routes = createBrowserRouter([
   {
     path: "/chat",
     element: <Chat />,
+  },
+  {
+    path: "/login",
+    element: <Login />
   }
 ]);
