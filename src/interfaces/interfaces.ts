@@ -15,6 +15,7 @@ export interface UserFormValues {
 export interface IAuth {
     user: User | null;
     loading: boolean;
+    isAuthLoading: boolean;
     signIn: (creds: LoginFormValues, onSuccess?: () => void) => void;
     signUp: (creds: UserFormValues) => void;
     signOut: () => void;

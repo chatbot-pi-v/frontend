@@ -3,44 +3,45 @@ import waves2 from '../../../../public/asset/login/waves2.svg';
 import chipsCircle from '../../../../public/asset/login/chipsCircle.svg';
 import ElipseMax from '../../../../public/asset/login/EllipseMax.svg';
 import ElipseMin from '../../../../public/asset/login/EllipseMin.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@src/hooks/use-auth/use-auth';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [password, setPassword] = useState('');
+  const authContext = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Debug - remover depois de corrigir
+  useEffect(() => {
+    console.log('AuthContext:', authContext);
+    console.log('Login function:', authContext?.login);
+  }, [authContext]);
 
-    const dados = {
-      email,
-      senha,
-    };
-
+  const handleLogin = async (event: any) => {
+    event.preventDefault();
+    
+    console.log('handleLogin chamado', { email, password });
+    console.log('authContext.login:', authContext.login);
+    
+    if (!authContext?.login) {
+      console.error('Função login não está disponível no contexto');
+      return;
+    }
+    
     try {
-      const resposta = await fetch('http://localhost:3000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dados),
+      await authContext.login({ email, password }, () => {
+        console.log('Callback executado, navegando para dashboard');
+        navigate('/dashboard');
       });
-
-      if (resposta.ok) {
-        const resultado = await resposta.json();
-        console.log('Login bem-sucedido:', resultado);
-        // redirecionar e seguir fluxo
-      } else {
-        console.log('Falha no login');
-      }
-    } catch (erro) {
-      console.error('Erro ao fazer login:', erro);
+    } catch (error) {
+      console.error('Erro durante o login:', error);
     }
   };
 
   return (
     <div className="flex flex-col lg:flex-row h-screen bg-[#E9F1FA]">
-  
       <div className="hidden lg:flex lg:flex-1 md:flex-1 relative">
         <div className="absolute top-0 left-0 flex flex-col items-start">
           <img src={Waves} className="h-auto w-37" />
@@ -52,14 +53,13 @@ export const Login = () => {
         </div>
       </div>
 
-     
-      <div className="flex-1 flex flex-col md:flex-[2_2_0%] items-center pt-8 ">
+      <div className="flex-1 flex flex-col md:flex-[2_2_0%] items-center pt-8">
         <div className="text-center mt-8 mb-8">
           <h1 className="text-3xl lg:text-5xl font-gothic text-gray-800">Nanã Chatbot</h1>
           <h2 className="text-md lg:text-lg font-Poppins text-gray-800 mt-1">Dashboard Admin</h2>
         </div>
 
-        <form className="w-full max-w-sm flex flex-col space-y-6 items-center mt-25" onSubmit={handleSubmit}>
+        <form className="w-full max-w-sm flex flex-col space-y-6 items-center mt-25" onSubmit={(e) => handleLogin(e)}>
           <h3 className="text-lg lg:text-xl text-gray-800 font-Poppins">LOGIN</h3>
 
           <input
@@ -72,28 +72,26 @@ export const Login = () => {
 
           <input
             type="password"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             className="w-full border-b border-gray-400 focus:outline-none bg-transparent text-sm text-gray-800 py-2"
           />
 
-          <button type="submit" className="bg-blue-500 hover:bg-blue-600 transition text-white text-sm px-6 py-2 rounded ">
+          <button type="submit" className="bg-blue-500 hover:bg-blue-600 transition text-white text-sm px-6 py-2 rounded">
             Entrar
           </button>
         </form>
       </div>
 
       <div className="hidden lg:flex lg:flex-1 md:flex-1 relative flex flex-col items-center justify-center items-end">
-
-        <div className="absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 ">
-          <img src={ElipseMin} className="h-auto w-9  ml-17 mt-72 "/>
+        <div className="absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2">
+          <img src={ElipseMin} className="h-auto w-9 ml-17 mt-72" />
         </div>
 
         <div className="">
           <img src={ElipseMax} className="h-auto w-30" />
         </div>
-
       </div>
     </div>
   );
