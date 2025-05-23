@@ -48,24 +48,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (data: IUser, callback?: () => void) => {
     try {
-      console.log('Executando login...', data);
       setLoading(true);
       const response = await AuthApi.login(data.email, data.password);
       const userToken = await response.getIdToken();
 
-      console.log('Login bem-sucedido, token obtido');
       setAuthorizationHeader(userToken);
       setToken(userToken);
       setIsAuthenticated(true);
       StorageService.setItem('session-token', { accessToken: userToken });
 
       if (callback) {
-        console.log('Executando callback do login');
         callback();
       }
     } catch (error) {
       console.error('Erro no login:', error);
-      toast.error('Credenciais inválidas');
+      alert('Credenciais inválidas');
     } finally {
       setLoading(false);
     }

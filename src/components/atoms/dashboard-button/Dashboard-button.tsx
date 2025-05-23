@@ -7,7 +7,6 @@ type DashboardButtonProps = {
 };
 
 export const DashboardButton = ({ label, logo, route }: DashboardButtonProps) => {
-    console.log('route - ', route)
     return (
         <> 
             <Link to={route}>

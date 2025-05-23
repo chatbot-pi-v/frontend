@@ -13,26 +13,11 @@ export const Login = () => {
   const authContext = useAuth();
   const navigate = useNavigate();
 
-  // Debug - remover depois de corrigir
-  useEffect(() => {
-    console.log('AuthContext:', authContext);
-    console.log('Login function:', authContext?.login);
-  }, [authContext]);
-
   const handleLogin = async (event: any) => {
     event.preventDefault();
-    
-    console.log('handleLogin chamado', { email, password });
-    console.log('authContext.login:', authContext.login);
-    
-    if (!authContext?.login) {
-      console.error('Função login não está disponível no contexto');
-      return;
-    }
-    
+
     try {
       await authContext.login({ email, password }, () => {
-        console.log('Callback executado, navegando para dashboard');
         navigate('/dashboard');
       });
     } catch (error) {
