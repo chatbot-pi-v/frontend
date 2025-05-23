@@ -14,7 +14,7 @@ export const DashboardSideBar = () => {
     };
 
     return (
-        <aside className="w-[15rem] h-screen bg-sidebar p-4 flex flex-col justify-between">
+        <aside className="min-w-[15rem] h-screen bg-sidebar p-4 flex flex-col justify-between">
             <div className="flex flex-col items-center mb-4">
                 <img src="../../public/assets/images/dashboard/woman.svg" alt="Logo" className="w-28 h-28 object-contain" />
                 <h1 className="text-6xl text-center font-gothic font-bold tracking-wide">Nanã</h1>
