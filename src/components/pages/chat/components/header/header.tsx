@@ -3,7 +3,7 @@ import { ArrowLeft } from '@src/components/pages/chat/components/icons/arrow-lef
 
 export const Header = () => {
   return (
-    <header className='flex w-full'>
+    <header className='flex h-8 w-full'>
 
       <img src={HeaderImage} alt='image' />
     </header>

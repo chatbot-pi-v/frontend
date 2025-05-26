@@ -37,7 +37,7 @@ export const PdfUpload = () => {
       const formData = new FormData();
       formData.append('files', files[i]);
       formData.append('citacoes', citacoes[i]);
-      formData.append('caminho', './docs/pdf');
+      formData.append('caminho', '../../docs/pdf');
 
       try {
         await fetch('http://localhost:8000/uploadfile', {
@@ -56,6 +56,7 @@ export const PdfUpload = () => {
     alert('Arquivos enviados com sucesso!');
     setFiles([]);
     setCitacoes([]);
+    window.location.reload();
   };
 
   const handleRemoveFile = (index: number) => {
