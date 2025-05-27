@@ -7,6 +7,8 @@ import { ContentSender } from './components/ContentSender'
 interface IMessages {
   text: string;
   sender: 'bot' | 'user';
+  image_base64?: string | null;
+  image_caption?: string | null;
 }
 
 const LoadingIndicator = () => {
@@ -22,7 +24,8 @@ const LoadingIndicator = () => {
 export const Chat = () => {
   const [ messageValue, setMessageValue ] = useState<string>('');
   const [messages, setMessages] = useState<IMessages[]>([
-    { sender: 'bot', text: 'Olá, sou sua assistente virtual inspirada na sabedoria ancestral de Nanã Buruquê, respeitada figura das tradições africanas e afro-brasileiras. Em que posso lhe ajudar?' },
+    { sender: 'bot',
+      text: 'Olá, sou sua assistente virtual inspirada na sabedoria ancestral de Nanã Buruquê, respeitada figura das tradições africanas e afro-brasileiras. Em que posso lhe ajudar?' },
   ]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -33,14 +36,22 @@ export const Chat = () => {
     ]);
     
     setIsLoading(true);
-
+  
     try {
       const response = await axios.post('http://localhost:3000/question', {
         question: message,
       });
 
-      const answer = response.data?.answer ?? 'Desculpe, não entendi.';
-      setMessages((prev) => [...prev, { sender: 'bot', text: answer }]);
+      console.log('response = ', response)
+  
+      const text = response.data?.answer ?? 'Desculpe, não entendi.';
+      const image_base64 = response.data?.image_base64 ?? null;
+      const image_caption = response.data?.image_caption ?? null;
+  
+      setMessages((prev) => [
+        ...prev,
+        { sender: 'bot', text, image_base64, image_caption }
+      ]);
     } catch (error) {
       console.error('Erro = ', error);
       setMessages((prev) => [
@@ -51,6 +62,7 @@ export const Chat = () => {
       setIsLoading(false);
     }
   };
+  
 
   const sendAMessage = (event: React.FormEvent) => {
     event.preventDefault();
