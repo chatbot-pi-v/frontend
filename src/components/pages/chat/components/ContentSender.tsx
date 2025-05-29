@@ -5,10 +5,13 @@ interface IContentSenderProps {
   item: {
     text: string;
     sender: 'bot' | 'user';
+    image_base64?: string | null;
+    image_caption?: string | null;
   };
+  isLoading: boolean;
 }
 
-export const ContentSender = ({ item }: IContentSenderProps) => {
+export const ContentSender = ({ item, isLoading }: IContentSenderProps) => {
   const botSender = item.sender === 'bot';
 
   return (
@@ -20,9 +23,22 @@ export const ContentSender = ({ item }: IContentSenderProps) => {
           </div>
         )}
 
-        <p className="bg-white text-[#151515] text-sm p-4 rounded-lg shadow-sm break-words whitespace-pre-wrap">
-          {item.text}
-        </p>
+        <div className="bg-white text-[#151515] text-sm p-4 rounded-lg shadow-sm break-words whitespace-pre-wrap">
+          <p>{item.text}</p>
+          
+          {botSender && item.image_base64 && (
+            <div className="mt-3">
+              <img
+                src={`data:image/jpeg;base64,${item.image_base64}`}
+                alt={item.image_caption ?? 'Imagem relacionada'}
+                className="max-w-full rounded"
+              />
+              {item.image_caption && (
+                <p className="text-xs text-gray-600 mt-1">{item.image_caption}</p>
+              )}
+            </div>
+          )}
+        </div>
 
         {!botSender && (
           <div className="flex-shrink-0">

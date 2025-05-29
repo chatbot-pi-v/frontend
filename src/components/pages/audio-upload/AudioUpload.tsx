@@ -40,7 +40,7 @@ export const AudioUpload = () => {
       const formData = new FormData();
       formData.append('files', files[i]);
       formData.append('citacoes', citacoes[i]);
-      formData.append('caminho', './docs/audio');
+      formData.append('caminho', '../../docs/audio');
 
       try {
         await fetch('http://localhost:8000/uploadfile', {
@@ -59,6 +59,7 @@ export const AudioUpload = () => {
     alert('Arquivos enviados com sucesso!');
     setFiles([]);
     setCitacoes([]);
+    window.location.reload();
   };
 
   const handleRemoveFile = (index: number) => {
