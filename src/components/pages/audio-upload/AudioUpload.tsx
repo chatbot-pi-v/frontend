@@ -79,7 +79,7 @@ export const AudioUpload = () => {
           <img
             src="./../../assets/images/dashboard/headphone.png"
             alt="Ícone de fone headset"
-            className="w-6 h-6"
+            className="w-15 h-15"
           />
           Upload de áudio
         </h1>
@@ -122,7 +122,7 @@ export const AudioUpload = () => {
           <img
             src="./../../assets/images/dashboard/link.png"
             alt="Ícone de link"
-            className="w-6 h-6"
+            className="w-15 h-15"
           />
           Enviar link
         </h1>
