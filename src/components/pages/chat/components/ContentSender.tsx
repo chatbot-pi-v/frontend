@@ -11,19 +11,19 @@ interface IContentSenderProps {
   isLoading: boolean;
 }
 
-export const ContentSender = ({ item, isLoading }: IContentSenderProps) => {
+export const ContentSender = ({ item }: IContentSenderProps) => {
   const botSender = item.sender === 'bot';
 
   return (
     <div className={`flex w-full p-2 ${botSender ? 'justify-start' : 'justify-end'}`}>
-      <div className={`flex items-start gap-3 max-w-[75%]`}>
+      <div className={`flex gap-3`}>
         {botSender && (
           <div className="flex-shrink-0">
-            <img src={bot_icon} alt="bot" className="w-8 h-8" />
+            <img src={bot_icon} alt="bot" className="w-8 h-8 xl:w-16 xl: xl:h-16" />
           </div>
         )}
 
-        <div className="bg-white text-[#151515] text-sm p-4 rounded-lg shadow-sm break-words whitespace-pre-wrap">
+        <div className="bg-white text-[#151515] text-sm xl:text-[1.15em] p-4 rounded-lg shadow-sm break-words whitespace-pre-wrap">
           <p>{item.text}</p>
           
           {botSender && item.image_base64 && (
@@ -42,7 +42,7 @@ export const ContentSender = ({ item, isLoading }: IContentSenderProps) => {
 
         {!botSender && (
           <div className="flex-shrink-0">
-            <img src={user_icon} alt="usuário" className="w-8 h-8" />
+            <img src={user_icon} alt="usuário" className="w-8 h-8 xl:w-16 xl:h-16" />
           </div>
         )}
       </div>

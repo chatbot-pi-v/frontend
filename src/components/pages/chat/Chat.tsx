@@ -83,7 +83,7 @@ export const Chat = () => {
       <Header />
 
       <main className='flex flex-col flex-1 w-full px-40 overflow-hidden justify-center items-center'>
-        <section className='flex flex-col w-[90%] flex-1 overflow-y-auto scrollbar-hide scroll-smooth'>
+        <section className='flex flex-col max-w-[950px] w-full flex-1 overflow-y-auto scrollbar-hide scroll-smooth mt-4'>
           {messages.map((item, index) => (
             <ContentSender item={item} key={index} isLoading={isLoading}/>
           ))}
@@ -99,7 +99,7 @@ export const Chat = () => {
       </main>
 
       <section className='flex items-center justify-center w-full p-4'>
-        <form onSubmit={(e: React.FormEvent) => sendAMessage(e)} className='flex gap-2 w-full max-w-[800px]'>
+        <form onSubmit={(e: React.FormEvent) => sendAMessage(e)} className='flex gap-2 w-full max-w-[950px]'>
           <textarea 
             placeholder='Digite uma mensagem...' 
             className='border rounded-2xl p-4 w-full resize-none overflow-y-auto scrollbar-hide text-left'
