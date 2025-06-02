@@ -74,9 +74,9 @@ export const PdfUpload = () => {
       <main className="flex-1 p-8">
         <h1 className="text-2xl font-semibold mb-4 flex items-center gap-2">
           <img
-            src="./../../assets/images/dashboard/headphone.png"
-            alt="Ícone de fone headset"
-            className="w-6 h-6"
+            src="./../../assets/images/dashboard/google-docs.png"
+            alt="Ícone de documento"
+            className="w-15 h-15"
           />
           Upload de PDF
         </h1>

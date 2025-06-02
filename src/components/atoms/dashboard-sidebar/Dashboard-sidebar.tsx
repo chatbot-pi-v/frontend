@@ -1,9 +1,20 @@
 import { SideBarButton } from "../sidebar-button/Sidebar-button";
-
+import { useAuth } from "@src/hooks/use-auth/use-auth";
+import { useNavigate } from "react-router-dom";
 
 export const DashboardSideBar = () => {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        const confirmLogout = window.confirm('Tem certeza que deseja sair?');
+        if (confirmLogout) {
+            logout(navigate);
+        }
+    };
+
     return (
-        <aside className="w-[15rem] h-screen bg-sidebar p-4 flex flex-col justify-between">
+        <aside className="min-w-[15rem] h-screen bg-sidebar p-4 flex flex-col justify-between">
             <div className="flex flex-col items-center mb-4">
                 <img src="../../public/assets/images/dashboard/woman.svg" alt="Logo" className="w-28 h-28 object-contain" />
                 <h1 className="text-6xl text-center font-gothic font-bold tracking-wide">Nanã</h1>
@@ -16,7 +27,12 @@ export const DashboardSideBar = () => {
                 <SideBarButton icon="../../public/assets/images/dashboard/users.svg" label="Gerenciar Usuários" route="/userscontrol" />
             </div>
             <div>
-                <SideBarButton icon="../../public/assets/images/dashboard/logout.svg" label="Sair" route="/pdfupload"/>
+                <SideBarButton 
+                    icon="../../public/assets/images/dashboard/logout.svg" 
+                    label="Sair" 
+                    onClick={handleLogout}
+                    isLogout={true}
+                />
             </div>
         </aside>
     );
